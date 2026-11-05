@@ -1,109 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagi Sore</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<script>
-    document.addEventListener("DOMContentLoaded", function(){
-
-        function plus(btn){
-            let count = btn.parentElement.querySelector(".count");
-            count.textContent = parseInt(count.textContent) + 1;
-            updateTotal();
-        }
-
-        function minus(btn){
-            let count = btn.parentElement.querySelector(".count");
-            if(parseInt(count.textContent) > 0){
-                count.textContent = parseInt(count.textContent) - 1;
-            }
-            updateTotal();
-        }
-
-        // hitung totalnyo
-        function updateTotal(){
-            let total = 0;
-
-            document.querySelectorAll(".item").forEach(item=>{
-                let checked = item.querySelector(".check").checked;
-                let price = parseInt(item.querySelector(".price").dataset.price);
-                let qty = parseInt(item.querySelector(".count").textContent);
-
-                if(checked && qty > 0){
-                    total += price * qty;
-                }
-            });
-
-            let totalEl = document.getElementById("total");
-            if(totalEl){
-                totalEl.textContent = "Rp" + total.toLocaleString();
-            }
-        }
-
-        document.querySelectorAll(".check").forEach(c=>{
-            c.addEventListener("change", updateTotal);
-        });
-
-        // biar biso kirim ke wa
-        function kirimPesanan(){
-            let nama = document.getElementById("nama").value.trim();
-            let alamat = document.getElementById("alamat").value.trim();
-
-            if(nama === "" || alamat === ""){
-                alert("Isi nama dan alamat dulu!");
-                return;
-            }
-
-            let total = 0;
-
-            let text = `==== PESANAN BARU ====
-
-    Nama: ${nama}
-    Alamat: ${alamat}
-
-    `;
-
-            document.querySelectorAll(".order .item").forEach(item=>{
-                let name = item.querySelector(".name").textContent;
-                let check = item.querySelector(".check").checked;
-                let price = parseInt(item.querySelector(".price").dataset.price);
-                let qty = parseInt(item.querySelector(".count").textContent);
-
-                if(check && qty > 0){
-                    let sub = price * qty;
-                    total += sub;
-                    text += `• ${name} x${qty} = Rp${sub}\n`;
-                }
-            });
-
-            if(total === 0){
-                alert("Pilih menu dulu!");
-                return;
-            }
-
-            text += `\n TOTAL: Rp${total}`;
-
-            let nomor = "6281274883302"; 
-            let url = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(text);
-
-            window.open(url, "_blank");
-        }
-
-        window.plus = plus;
-        window.minus = minus;
-        window.kirimPesanan = kirimPesanan;
-
-    });
-</script>
-<body>
-    
 <body>
     <header class="header-head">
         <div class="head-section">
-            <p>🕒 Buka Jam 10.00 pagi - 22.00 malam</p>
+            <p>Buka Jam 10.00 pagi - 22.00 malam</p>
             <h1><i>Jagonya Rendang</i></h1>
             <input type="checkbox" id="menu-toggle1">
             <label for="menu-toggle1" class="burger">
@@ -112,9 +18,9 @@
                 <span></span>
             </label>
             <nav class="nav-head">
-                <a href="https://www.tiktok.com/@pagisore.id">Tiktok</a>
-                <a href="https://www.instagram.com/pagisoreid/?hl=en">Instagram</a>
-                <a href="https://www.youtube.com/@PagiSoreID">Youtube</a>
+                <a href="https://www.tiktok.com/@pagisore.id" target="_blank">Tiktok</a>
+                <a href="https://www.instagram.com/pagisoreid/?hl=en" target="_blank">Instagram</a>
+                <a href="https://www.youtube.com/@PagiSoreID" target="_blank">Youtube</a>
             </nav>
         </div>
         <div class="header-section">
@@ -126,20 +32,16 @@
                 <span></span>
             </label>
             <nav class="nav-header">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#menu">Menu</a></li>
-                <nav>
-                    <ul class="orr">
-                        <li class="dropdown">
-                            <a href="#order-container">Order ▾</a>
-                            <ul class="dropdown-menu">
-                                <li class="active"><a href="#reservation">Reservation</a></li>
-                                <li><a href="#order">Order Online</a></li>
-                            </ul>
-                        </li>
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#menu">Menu</a>
+                <div class="dropdown">
+                    <a href="#order-container">Order ▾</a>
+                    <ul class="dropdown-menu">
+                        <li class="active"><a href="#reservation">Reservation</a></li>
+                        <li><a href="#order">Order Online</a></li>
                     </ul>
-                </nav>
+                </div>
                 <a href="#testimoni">Testimoni</a>
                 <a href="#location">Location</a>
             </nav>
@@ -153,7 +55,6 @@
     </header>
 
     <section class="home" id="home">
-        <!-- wajib slider disuruh sir rommy -->
         <div class="slider">
             <input type="radio" name="slide" id="slide1" checked>
             <input type="radio" name="slide" id="slide2">
@@ -164,7 +65,7 @@
                     <div class="content">
                         <h1 class="title">Welcome to Pagi Sore Website</h1>
                         <h3><i>by: binanf1411</i></h3>
-                        <button>Lihat Menu</button>
+                        <a href="#menu" class="btn-hero">Lihat Menu</a>
                     </div>
                 </div>
 
@@ -172,7 +73,7 @@
                     <div class="content">
                         <h1 class="title">Nikmati Kapan Saja</h1>
                         <p>Suasana nyaman dengan hidangan berkualitas, cocok untuk keluarga maupun momen spesial Anda</p>
-                        <button>Kunjungi Kami</button>
+                        <a href="#location" class="btn-hero">Kunjungi Kami</a>
                     </div>
                 </div>
                 
@@ -180,11 +81,10 @@
                     <div class="content">
                         <h1 class="title">Rendang Terbaik</h1>
                         <p>Dimasak perlahan dengan bumbu pilihan, menghadirkan rasa autentik yang kaya dan tak terlupakan</p>
-                        <button>Pesan Sekarang</button>
+                        <a href="#order" class="btn-hero">Pesan Sekarang</a>
                     </div>
                 </div>
             </div>
-
 
             <div class="nav">
                 <label for="slide1" class="dot"></label>
@@ -203,11 +103,7 @@
 
                     Sejak awal berdirinya, Pagi Sore berkomitmen untuk menyajikan hidangan khas Minangkabau dengan menggunakan bahan-bahan pilihan serta resep tradisional yang diwariskan secara turun-temurun. Salah satu menu andalan yang menjadi favorit pelanggan adalah rendang, yang dimasak dengan rempah-rempah khas Indonesia hingga menghasilkan rasa yang kaya dan mendalam. <br><br>
 
-                    Seiring berjalannya waktu, Pagi Sore terus berkembang dan membuka berbagai cabang di sejumlah kota besar di Indonesia, seperti Jakarta, Pekanbaru, dan Bandar Lampung. Hal ini menunjukkan kepercayaan masyarakat terhadap kualitas dan pelayanan yang diberikan. <br><br>
-
-                    Tidak hanya mengutamakan cita rasa, Pagi Sore juga menghadirkan suasana restoran yang nyaman dan modern, sehingga cocok untuk berbagai kesempatan, mulai dari makan bersama keluarga hingga pertemuan bisnis. <br><br>
-
-                    Hingga saat ini, Pagi Sore tetap mempertahankan nilai-nilai tradisi sambil terus berinovasi untuk memenuhi selera pelanggan masa kini, menjadikannya sebagai salah satu restoran khas Indonesia yang terpercaya dan berkelas.
+                    Seiring berjalannya waktu, Pagi Sore terus berkembang dan membuka berbagai cabang di sejumlah kota besar di Indonesia, seperti Jakarta, Pekanbaru, dan Bandar Lampung. Hal ini menunjukkan kepercayaan masyarakat terhadap kualitas dan pelayanan yang diberikan.
                 </p>
             </div>
             <div class="about-img">
@@ -215,7 +111,6 @@
             </div>
         </div>
     </section>
-
 
     <section class="menu" id="menu">
         <h1>Best Seller</h1>
@@ -233,98 +128,115 @@
         <div class="menu-content">
             <div class="content makanan">
                 <div class="card">
-                    <img src="images/rendang.webp">
-                    <div class="price">
-                        <h3>Rendang</h3>
-                        <p>Rp 38.000</p>
+                    <img src="images/rendang.webp" alt="Rendang">
+                    <div class="card-body">
+                        <div class="price">
+                            <h3>Rendang</h3>
+                            <p>Rp 38.000</p>
+                        </div>
+                        <h5>Rendang daging sapi khas Padang dengan bumbu rempah kaya rasa, dimasak perlahan hingga empuk dan meresap</h5>
+                        <button>Pesan Sekarang</button>
                     </div>
-                    <h5>Rendang daging sapi khas Padang dengan bumbu rempah kaya rasa, dimasak perlahan hingga empuk dan meresap</h5>
-                    <button>Pesan Sekarang</button>
                 </div>
 
                 <div class="card">
-                    <img src="images/pop.jpg">
-                    <div class="price">
-                        <h3>Ayam Pop</h3>
-                        <p>Rp 38.000</p>
+                    <img src="images/pop.jpg" alt="Ayam Pop">
+                    <div class="card-body">
+                        <div class="price">
+                            <h3>Ayam Pop</h3>
+                            <p>Rp 38.000</p>
+                        </div>
+                        <h5>Ayam pop khas Padang yang dimasak lembut dengan saos yang gurih, menghadirkan rasa gurih alami dan nikmat</h5>
+                        <button>Pesan Sekarang</button>
                     </div>
-                    <h5>Ayam pop khas Padang yang dimasak lembut dengan saos yang gurih, menghadirkan rasa gurih alami dan nikmat</h5>
-                    <button>Pesan Sekarang</button>
                 </div>
 
                 <div class="card">
-                    <img src="images/udang.webp">
-                    <div class="price">
-                        <h3>Udang Tofu</h3>
-                        <p>Rp 75.000</p>
+                    <img src="images/udang.webp" alt="Udang Tofu">
+                    <div class="card-body">
+                        <div class="price">
+                            <h3>Udang Tofu</h3>
+                            <p>Rp 75.000</p>
+                        </div>
+                        <h5>Perpaduan udang dan tahu dengan sambal pedas yang meresap, bikin nambah terus</h5>
+                        <button>Pesan Sekarang</button>
                     </div>
-                    <h5>Perpaduan udang dan tahu dengan sambal pedas yang meresap, bikin nambah terus</h5>
-                    <button>Pesan Sekarang</button>
                 </div>
             </div>
 
             <div class="content minuman">
                 <div class="card">
-                    <img src="images/jus-alpukat.jpg">
-                    <div class="price">
-                        <h3>Jus Alpukat</h3>
-                        <p>Rp 8.000</p>
+                    <img src="images/jus-alpukat.jpg" alt="Jus Alpukat">
+                    <div class="card-body">
+                        <div class="price">
+                            <h3>Jus Alpukat</h3>
+                            <p>Rp 8.000</p>
+                        </div>
+                        <h5>Alpukatnya segar dan enggak enek. Nyaman banget ditenggorokan</h5>
+                        <button>Pesan Sekarang</button>
                     </div>
-                    <h5>Alpukatnya segar dan enggak enek. Nyaman banget ditenggorokan</h5>
-                    <button>Pesan Sekarang</button>
                 </div>
 
                 <div class="card">
-                    <img src="images/es-teh.jpg">
-                    <div class="price">
-                        <h3>Es Teh</h3>
-                        <p>Rp 15.000</p>
+                    <img src="images/es-teh.jpg" alt="Es Teh">
+                    <div class="card-body">
+                        <div class="price">
+                            <h3>Es Teh</h3>
+                            <p>Rp 15.000</p>
+                        </div>
+                        <h5>Teh pilihan yang disajikan dingin, segar dan cocok menemani makan</h5>
+                        <button>Pesan Sekarang</button>
                     </div>
-                    <h5>Teh pilihan yang disajikan dingin, segar dan cocok menemani makan</h5>
-                    <button>Pesan Sekarang</button>
                 </div>
 
                 <div class="card">
-                    <img src="images/kelapamuda.jpg">
-                    <div class="price">
-                        <h3>Es Kelapa Muda</h3>
-                        <p>Rp 26.000</p>
+                    <img src="images/kelapamuda.jpg" alt="Es Kelapa Muda">
+                    <div class="card-body">
+                        <div class="price">
+                            <h3>Es Kelapa Muda</h3>
+                            <p>Rp 26.000</p>
+                        </div>
+                        <h5>Air kelapa muda segar dengan daging kelapa yang lembut, menyegarkan dan cocok diminum kapan saja</h5>
+                        <button>Pesan Sekarang</button>
                     </div>
-                    <h5>Air kelapa muda segar dengan daging kelapa yang lembut, menyegarkan dan cocok diminum kapan saja</h5>
-                    <button>Pesan Sekarang</button>
                 </div>
 
                 <div class="card">
-                    <img src="images/esjeruk.jpg">
-                    <div class="price">
-                        <h3>Es Jeruk</h3>
-                        <p>Rp 15.000</p>
+                    <img src="images/esjeruk.jpg" alt="Es Jeruk">
+                    <div class="card-body">
+                        <div class="price">
+                            <h3>Es Jeruk</h3>
+                            <p>Rp 15.000</p>
+                        </div>
+                        <h5>Perasan jeruk segar dengan rasa manis dan sedikit asam, memberikan kesegaran alami di setiap tegukan</h5>
+                        <button>Pesan Sekarang</button>
                     </div>
-                    <h5>Perasan jeruk segar dengan rasa manis dan sedikit asam, memberikan kesegaran alami di setiap tegukan</h5>
-                    <button>Pesan Sekarang</button>
                 </div>
-
             </div>
 
             <div class="content dessert">
                 <div class="card">
-                    <img src="images/buah-potong.png">
-                    <div class="price">
-                        <h3>Buah Potong</h3>
-                        <p>Rp 20.000</p>
+                    <img src="images/buah-potong.png" alt="Buah Potong">
+                    <div class="card-body">
+                        <div class="price">
+                            <h3>Buah Potong</h3>
+                            <p>Rp 20.000</p>
+                        </div>
+                        <h5>Pilihan buah segar berkualitas dengan rasa manis alami, disajikan fresh untuk kesegaran maksimal</h5>
+                        <button>Pesan Sekarang</button>
                     </div>
-                    <h5>Pilihan buah segar berkualitas dengan rasa manis alami, disajikan fresh untuk kesegaran maksimal</h5>
-                    <button>Pesan Sekarang</button>
                 </div>
 
                 <div class="card">
-                    <img src="images/msr.png">
-                    <div class="price">
-                        <h3>Mango Sticky Rice</h3>
-                        <p>Rp 31.000</p>
+                    <img src="images/msr.png" alt="Mango Sticky Rice">
+                    <div class="card-body">
+                        <div class="price">
+                            <h3>Mango Sticky Rice</h3>
+                            <p>Rp 31.000</p>
+                        </div>
+                        <h5>Dessert khas Thailand dengan mangga matang, ketan pulen, dan saus santan creamy yang lezat</h5>
+                        <button>Pesan Sekarang</button>
                     </div>
-                    <h5>Dessert khas Thailand dengan mangga matang, ketan pulen, dan saus santan creamy yang lezat</h5>
-                    <button>Pesan Sekarang</button>
                 </div>
             </div>
         </div>
@@ -396,7 +308,7 @@
             <div class="item">
                 <input type="checkbox" class="check">
                 <span class="name">Tunjang</span>
-                <span class="price" data-price="50000">Rp45.000</span>
+                <span class="price" data-price="45000">Rp45.000</span>
                 <div class="qty">
                     <button onclick="minus(this)">-</button>
                     <span class="count">0</span>
@@ -483,7 +395,6 @@
                 </div>
             </div>
 
-        
             <h2>Dessert</h2>
 
             <div class="item">
@@ -540,7 +451,7 @@
             <p>Jangan sampai kehabisan tempat! Reservasi sekarang dan nikmati hidangan favorit anda tanpa menunggu</p>
             <form onsubmit="kirimWA(event)">
                 <label>Nama</label>
-                <input type="text" name="nama" required>
+                <input type="text" name="nama" placeholder="Masukkan nama" required>
 
                 <label>Tanggal Reservasi</label>
                 <input type="date" name="tanggal" required>
@@ -549,7 +460,7 @@
                 <input type="time" name="waktu" required>
 
                 <label>Jumlah Tamu</label>
-                <input type="number" name="tamu" min="1" required>
+                <input type="number" name="tamu" min="1" placeholder="Jumlah orang" required>
 
                 <label>Permintaan Khusus (Opsional)</label>
                 <textarea name="pesan" rows="3" placeholder="Contoh: dekat kasir"></textarea>
@@ -563,7 +474,7 @@
         <h1>Apa Kata Mereka</h1>
         <p>Kami berikan yang terbaik, karena kepuasan konsumen selalu yang utama</p>
 
-        <div class="slider">
+        <div class="slider-testi">
             <div class="slide-track">
                 <div class="box">
                     <p>"Rendangnya juara banget, dagingnya empuk!"</p>
@@ -589,7 +500,6 @@
                     <h4>- Bulan</h4>
                 </div>
 
-
                 <div class="box">
                     <p>"Pelayanannya cepat, gak nunggu lama."</p>
                     <div class="stars">★★★★★</div>
@@ -601,74 +511,30 @@
                     <div class="stars">★★★★☆</div>
                     <h4>- Dika</h4>
                 </div>
-
-                <div class="box">
-                    <p>"Gulai nya enak banget, kuahnya kental!"</p>
-                    <div class="stars">★★★★★</div>
-                    <h4>- Lina</h4>
-                </div>
-
-                <div class="box">
-                    <p>"Porsinya banyak, puas banget makan disini."</p>
-                    <div class="stars">★★★★★</div>
-                    <h4>- Fajar</h4>
-                </div>
-
-                <div class="box">
-                    <p>"Es kelapa mudanya seger banget!"</p>
-                    <div class="stars">★★★★☆</div>
-                    <h4>- Nisa</h4>
-                </div>
-
-                <div class="box">
-                    <p>"Tempat favorit buat makan bareng keluarga."</p>
-                    <div class="stars">★★★★★</div>
-                    <h4>- Yoga</h4>
-                </div>
-
-                <div class="box">
-                    <p>"Menu lengkap dan rasanya konsisten."</p>
-                    <div class="stars">★★★★★</div>
-                    <h4>- Tono</h4>
-                </div>
-
-                <div class="box">
-                    <p>"Pelayannya ramah ramah, suka."</p>
-                    <div class="stars">★★★★★</div>
-                    <h4>- Sabrina</h4>
-                </div>
             </div>
         </div>
     </section>
 
     <section class="location" id="location">
         <h1>Cabang Pertama</h1>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.43395313265!2d104.75175667497041!3d-2.976989196999112!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3b760ad0840347%3A0x2e0fefb4ea649b4a!2sPagi%20Sore!5e0!3m2!1sen!2sid!4v1777540970953!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="iframe-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.43395313265!2d104.75175667497041!3d-2.976989196999112!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3b760ad0840347%3A0x2e0fefb4ea649b4a!2sPagi%20Sore!5e0!3m2!1sen!2sid!4v1777540970953!5m2!1sen!2sid" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
     </section>
 
     <footer class="footer">
         <div class="parts">
             <div class="p1">
                 <h2>Pagi Sore</h2>
-                <p>Pagi Sore menghadirkan hidangan khas Minang, Sumatera Barat dengan cita rasa autentik yang dipadukan dengan suasana <br> 
-                    nyaman dan pelayanan terbaik. Dengan berbagai cabang yang tersebar di berbagai kota, kami berkomitmen untuk <br>
-                memberikan pengalaman kuliner yang hangan</p>
-
+                <p>Pagi Sore menghadirkan hidangan khas Minang, Sumatera Barat dengan cita rasa autentik yang dipadukan dengan suasana nyaman dan pelayanan terbaik.</p>
             </div>
             
             <div class="p2">
                 <h2>Lokasi</h2>
-                <p>Palembang:</p>
-                <a href="https://www.google.com/maps?q=Pagi+Sore+Sudirman+Palembang" target="_blank">📍 Pagi Sore Palembang</a>
-
-                <p>Jakarta:</p>
-                <a href="https://www.google.com/maps?q=Pagi+Sore+Cipete+Jakarta" target="_blank">📍 Pagi Sore Jakarta (Cipete)</a>
-
-                <p>Pekanbaru:</p>
-                <a href="https://www.google.com/maps?q=Pagi+Sore+Pekanbaru" target="_blank">📍 Pagi Sore Pekanbaru</a>
-
-                <p>Lampung:</p>
-                <a href="https://www.google.com/maps?q=RM+Pagi+Sore+Kayu+Agung" target="_blank">📍 Pagi Sore Lampung (Kayu Agung)</a>
+                <p>Palembang: <a href="https://www.google.com/maps?q=Pagi+Sore+Sudirman+Palembang" target="_blank">📍 Pagi Sore Palembang</a></p>
+                <p>Jakarta: <a href="https://www.google.com/maps?q=Pagi+Sore+Cipete+Jakarta" target="_blank">📍 Pagi Sore Jakarta (Cipete)</a></p>
+                <p>Pekanbaru: <a href="https://www.google.com/maps?q=Pagi+Sore+Pekanbaru" target="_blank">📍 Pagi Sore Pekanbaru</a></p>
+                <p>Lampung: <a href="https://www.google.com/maps?q=RM+Pagi+Sore+Kayu+Agung" target="_blank">📍 Pagi Sore Lampung</a></p>
             </div>
 
             <div class="p3">
@@ -682,46 +548,119 @@
         </div>
         <hr>
         <p class="cffo">&copy; Bintang 2026 Pagi Sore. All Rights Reserved</p>
-        <div class="hgh"></div>
     </footer>
 
-    <button id="scrollTopBtn">↑</button>
+    <button id="scrollTopBtn" title="Kembali ke atas">↑</button>
 
     <script>
-        const btn = document.getElementById("scrollTopBtn");
+        document.addEventListener("DOMContentLoaded", function(){
+            function plus(btn){
+                let count = btn.parentElement.querySelector(".count");
+                count.textContent = parseInt(count.textContent) + 1;
+                updateTotal();
+            }
 
-        window.onscroll = function () {
-        if (window.scrollY > 200) {
-            btn.style.display = "block";
-        } else {
-            btn.style.display = "none";
-        }
-        };
+            function minus(btn){
+                let count = btn.parentElement.querySelector(".count");
+                if(parseInt(count.textContent) > 0){
+                    count.textContent = parseInt(count.textContent) - 1;
+                }
+                updateTotal();
+            }
 
-        btn.onclick = function () {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
+            function updateTotal(){
+                let total = 0;
+                document.querySelectorAll(".order .item").forEach(item=>{
+                    let checked = item.querySelector(".check").checked;
+                    let price = parseInt(item.querySelector(".price").dataset.price);
+                    let qty = parseInt(item.querySelector(".count").textContent);
+
+                    if(checked && qty > 0){
+                        total += price * qty;
+                    }
+                });
+
+                let totalEl = document.getElementById("total");
+                if(totalEl){
+                    totalEl.textContent = "Rp" + total.toLocaleString('id-ID');
+                }
+            }
+
+            document.querySelectorAll(".order .check").forEach(c=>{
+                c.addEventListener("change", updateTotal);
+            });
+
+            function kirimPesanan(){
+                let nama = document.getElementById("nama").value.trim();
+                let alamat = document.getElementById("alamat").value.trim();
+
+                if(nama === "" || alamat === ""){
+                    alert("Isi nama dan alamat dulu!");
+                    return;
+                }
+
+                let total = 0;
+                let text = `==== PESANAN BARU ====\n\nNama: ${nama}\nAlamat: ${alamat}\n\n`;
+
+                document.querySelectorAll(".order .item").forEach(item=>{
+                    let name = item.querySelector(".name").textContent;
+                    let check = item.querySelector(".check").checked;
+                    let price = parseInt(item.querySelector(".price").dataset.price);
+                    let qty = parseInt(item.querySelector(".count").textContent);
+
+                    if(check && qty > 0){
+                        let sub = price * qty;
+                        total += sub;
+                        text += `• ${name} x${qty} = Rp${sub.toLocaleString('id-ID')}\n`;
+                    }
+                });
+
+                if(total === 0){
+                    alert("Pilih menu dulu!");
+                    return;
+                }
+
+                text += `\nTOTAL: Rp${total.toLocaleString('id-ID')}`;
+
+                let nomor = "6281274883302"; 
+                let url = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(text);
+
+                window.open(url, "_blank");
+            }
+
+            window.plus = plus;
+            window.minus = minus;
+            window.kirimPesanan = kirimPesanan;
         });
+
+        const btnScroll = document.getElementById("scrollTopBtn");
+        window.onscroll = function () {
+            if (window.scrollY > 200) {
+                btnScroll.style.display = "block";
+            } else {
+                btnScroll.style.display = "none";
+            }
         };
 
+        btnScroll.onclick = function () {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        };
 
         let current = 1;
-        const total = 3;
-
+        const totalSlides = 3;
         setInterval(() => {
             current++;
-            if (current > total) current = 1;
-
-            document.getElementById("slide" + current).checked = true;
+            if (current > totalSlides) current = 1;
+            let slideCheck = document.getElementById("slide" + current);
+            if(slideCheck) slideCheck.checked = true;
         }, 5000); 
 
-
         const darkBtn = document.getElementById("darkToggle");
-
         darkBtn.onclick = function () {
             document.body.classList.toggle("dark-mode");
-
             if (document.body.classList.contains("dark-mode")) {
                 darkBtn.innerText = "☀️";
                 localStorage.setItem("theme", "dark");
@@ -737,14 +676,9 @@
                 darkBtn.innerText = "☀️";
             }
         };
-    </script>
 
-    <script>
-        // kirim ke wa untuk ngereservasi tuh loh
         function kirimWA(e) {
             e.preventDefault();
-
-            
             const nama = document.querySelector('[name="nama"]').value.trim();
             const tanggal = document.querySelector('[name="tanggal"]').value;
             const waktu = document.querySelector('[name="waktu"]').value;
@@ -763,28 +697,15 @@
 
             const now = new Date();
             const today = now.toISOString().split("T")[0];
-
-        
             if (tanggal < today) {
                 alert("Tanggal tidak boleh di masa lalu!");
                 return;
             }
 
             const permintaan = pesan === "" ? "Tidak ada" : pesan;
-
-            const text = `Halo, saya ingin reservasi meja:
-
-            Nama: ${nama}
-            Tanggal: ${tanggal}
-            Waktu: ${waktu}
-            Jumlah Tamu: ${tamu}
-            Permintaan: ${permintaan}`;
-
+            const text = `Halo, saya ingin reservasi meja:\n\nNama: ${nama}\nTanggal: ${tanggal}\nWaktu: ${waktu}\nJumlah Tamu: ${tamu}\nPermintaan: ${permintaan}`;
             const nomor = "6281274883302"; 
-
             const url = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(text);
-
-            console.log(url);
 
             window.open(url, "_blank");
         }
